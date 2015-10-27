@@ -35,19 +35,20 @@ universo.factory('$appBakery' , function($http , $q , $localStorage){
 				menu.push({
 					title:page.name,
 					icon:page.icon,
+					id:page.page_id,
 					route:'/#/'+page.id+"/"+page.id
 				});
 			});
 
 			return menu;
 		},
-		routes: function($stateProvider){
+		routes: function( appJson ,  $stateProvider){
 
-			var appJson = $localStorage['app-json'];
+			var appJson = appJson || $localStorage['app-json'];
 			
 			angular.forEach(appJson.pages , function(page){
 				$stateProvider 
-		          .state(page.name+page.id, {
+		          .state(page.id.toString(), {
 		            url: '/'+page.id+"/:pageId",
 		            templateUrl: 'views/moblet-default-view.html',
 		            controller: 'MobletController'

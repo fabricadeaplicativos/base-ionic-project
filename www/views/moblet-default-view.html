@@ -1,5 +1,5 @@
-<ion-view view-title="My Page">
+<ion-view view-title="{{pageDefinitions.name}}">
   <ion-content>
-    <p>{{pageDefinitions | json : 4}}</p>
+  	<h3 ng-repeat="moblet in moblets">{{moblet}}</h3>
   </ion-content>
-</ion-view>
+ </ion-view>

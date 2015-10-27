@@ -1,12 +1,12 @@
-<ion-view view-title="My Page">
+<ion-view view-title="{{appTitle}}">
   <ion-content>
     <div class="list">
 
-	    <a class="item item-avatar" href="{{link.route}}" ng-repeat="link in menu">
+	    <a class="item item-avatar" ng-click="goTo(link)" ng-repeat="link in menu">
 	      <img ng-src="{{link.icon}}">
 	      <h2>{{link.title}} </h2>
 	      <p></p>
 	    </a>
 	</div>
   </ion-content>
-</ion-view>
+ </ion-view>

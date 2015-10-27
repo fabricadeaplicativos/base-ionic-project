@@ -4,7 +4,11 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 angular.module('starter', ['ionic' , 'Universo' , 'Moblets' , 'ngStorage'])
-.constant('AppUrl' , '/api/1.json')
+
+.constant('AppUrl' , '/api/1.json') //dev
+// .constant('AppUrl' , 'http://proxy.universo.mobi/applications/1.json') //prod
+
+
 .config(function($stateProvider, $urlRouterProvider , $appBakeryProvider , AppUrl) {
     $stateProvider
     .state('home', {
@@ -16,7 +20,7 @@ angular.module('starter', ['ionic' , 'Universo' , 'Moblets' , 'ngStorage'])
     var $appBakery = $appBakeryProvider.$get();
 
     $appBakery.load(AppUrl).then(function(load){
-        $appBakery.routes($stateProvider);
+        $appBakery.routes(load , $stateProvider);
     });
 
   // if none of the above states are matched, use this as the fallback
