@@ -1,5 +1,15 @@
 <ion-view view-title="{{pageDefinitions.name}}">
   <ion-content>
-  	<h3 ng-repeat="moblet in moblets">{{moblet}}</h3>
+
+  	<h3 ng-repeat="moblet in moblets_list">{{moblet}}</h3>
+
+	
+
+	<p>{{moblets}}</p>
+
+
   </ion-content>
+  <ion-footer-bar>
+	<u-simple ng-if="moblets.usimple.active" url="moblets.usimple.url"></u-simple>
+  </ion-footer-bar>
  </ion-view>

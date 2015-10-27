@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 angular.module('starter', ['ionic' , 'Universo' , 'Moblets' , 'ngStorage'])
 
-.constant('AppUrl' , '/api/1.json') //dev
+.constant('AppUrl' , '/api/4.json') //dev
 // .constant('AppUrl' , 'http://proxy.universo.mobi/applications/1.json') //prod
 
 

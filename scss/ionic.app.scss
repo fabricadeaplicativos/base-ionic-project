@@ -21,3 +21,12 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
 
+.bar-footer{
+	padding:0px;
+	margin:0px;	
+}
+
+u-simple{
+	width:100%;
+	text-align:center;
+}
