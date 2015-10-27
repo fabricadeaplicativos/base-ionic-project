@@ -1,6 +1,12 @@
 <ion-view view-title="My Page">
   <ion-content>
-    <p>home</p>
-    <a href="/#/mapa"> mapa </a>
+    <div class="list">
+
+	    <a class="item item-avatar" href="{{link.route}}" ng-repeat="link in menu">
+	      <img ng-src="{{link.icon}}">
+	      <h2>{{link.title}} </h2>
+	      <p></p>
+	    </a>
+	</div>
   </ion-content>
 </ion-view>

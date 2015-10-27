@@ -3,8 +3,8 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('starter', ['ionic' , 'Universo' , 'Moblets'])
-.constant('AppUrl' , 'http://proxy.universo.mobi/applications/2.json')
+angular.module('starter', ['ionic' , 'Universo' , 'Moblets' , 'ngStorage'])
+.constant('AppUrl' , '/api/1.json')
 .config(function($stateProvider, $urlRouterProvider , $appBakeryProvider , AppUrl) {
     $stateProvider
     .state('home', {
@@ -13,18 +13,10 @@ angular.module('starter', ['ionic' , 'Universo' , 'Moblets'])
       controller: 'HomeController'
     });
 
-    $appBakeryProvider.$get()
-    .load(AppUrl).then(function(load){
-      
-      angular.forEach(load.pages, function(page){
-         $stateProvider 
-          .state(page.name, {
-            url: '/'+page.name,
-            templateUrl: 'views/moblet-default-view.html',
-            controller: 'MobletController'
-          });
-        })
+    var $appBakery = $appBakeryProvider.$get();
 
+    $appBakery.load(AppUrl).then(function(load){
+        $appBakery.routes($stateProvider);
     });
 
   // if none of the above states are matched, use this as the fallback
@@ -40,6 +32,5 @@ angular.module('starter', ['ionic' , 'Universo' , 'Moblets'])
     if(window.StatusBar) {
       StatusBar.styleDefault();
     }
-
   });
 })
