@@ -4,65 +4,31 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 angular.module('starter', ['ionic' , 'Universo' , 'Moblets'])
-.config(function($stateProvider, $urlRouterProvider , $appBakery) {
-  
-  
-
-  angular.forEach($appBakery.routes() , function(route){
-    $stateProvider.state(route.name, {
-      url: route.uri
+.constant('AppUrl' , 'http://proxy.universo.mobi/applications/2.json')
+.config(function($stateProvider, $urlRouterProvider , $appBakeryProvider , AppUrl) {
+    $stateProvider
+    .state('home', {
+      url: '/home',
+      templateUrl: 'views/home-view.html',
+      controller: 'HomeController'
     });
 
-  })
+    $appBakeryProvider.$get()
+    .load(AppUrl).then(function(load){
+      
+      angular.forEach(load.pages, function(page){
+         $stateProvider 
+          .state(page.name, {
+            url: '/'+page.name,
+            templateUrl: 'views/moblet-default-view.html',
+            controller: 'MobletController'
+          });
+        })
 
+    });
 
-  $stateProvider
-
-    .state('app', {
-    url: '/app',
-    abstract: true,
-    templateUrl: 'templates/menu.html',
-    controller: 'AppCtrl'
-  })
-
-  .state('app.search', {
-    url: '/search',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/search.html'
-      }
-    }
-  })
-
-  .state('app.browse', {
-      url: '/browse',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/browse.html'
-        }
-      }
-    })
-    .state('app.playlists', {
-      url: '/playlists',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/playlists.html',
-          controller: 'PlaylistsCtrl'
-        }
-      }
-    })
-
-  .state('app.single', {
-    url: '/playlists/:playlistId',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/playlist.html',
-        controller: 'PlaylistCtrl'
-      }
-    }
-  });
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/playlists');
+  $urlRouterProvider.otherwise('/home');
 })
 .run(function($ionicPlatform , $appBakery) {
   $ionicPlatform.ready(function() {
@@ -74,11 +40,6 @@ angular.module('starter', ['ionic' , 'Universo' , 'Moblets'])
     if(window.StatusBar) {
       StatusBar.styleDefault();
     }
-
-    $appBakery.load('http://proxy.universo.mobi/applications/2.json').then(function(data){
-      console.log(data);
-    });
-
 
   });
 })
