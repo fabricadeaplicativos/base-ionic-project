@@ -1,4 +1,13 @@
 {
   "name": "base-ionic-project",
-  "app_id": ""
+  "app_id": "",
+  "gulpStartupTasks": [
+    "watch"
+  ],
+  "proxies": [
+    {
+      "path": "/api",
+      "proxyUrl": "http://proxy.universo.mobi/applications"
+    }
+  ]
 }
