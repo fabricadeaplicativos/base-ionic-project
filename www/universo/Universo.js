@@ -7,8 +7,11 @@
 
 var universo = angular.module('Universo', []);
 
-universo.factory('$appBakery' , function($http , $q , $localStorage){
+universo.factory('$appBakery' , function($http , $q , $localStorage , $rootScope){
 	return {
+		info:function(){
+			return $localStorage['app-json'].info;
+		},
 		load:function(uri){
 
 			//create promise 
@@ -19,6 +22,7 @@ universo.factory('$appBakery' , function($http , $q , $localStorage){
 			.success(function(data){
 				console.log(data);
 				$localStorage['app-json'] = data;  
+				$rootScope.$broadcast('app-json::loaded');
 				deferred.resolve(data);
 			})
 			.error(function(error){

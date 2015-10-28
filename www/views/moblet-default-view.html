@@ -1,12 +1,11 @@
 <ion-view view-title="{{pageDefinitions.name}}">
   <ion-content>
 
-  	<h3 ng-repeat="moblet in moblets_list">{{moblet}}</h3>
-
-	
+<!--   	<h3 ng-repeat="moblet in moblets_list">{{moblet}}</h3>
 
 	<p>{{moblets}}</p>
-
+ -->
+ 	<u-list ng-if="moblets.ulist.active" code="moblets.ulist.code" url="moblets.ulist.url"></u-list>
 
   </ion-content>
   <ion-footer-bar>

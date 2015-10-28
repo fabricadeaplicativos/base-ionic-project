@@ -1,10 +1,10 @@
 angular.module('starter')
-.controller('HomeController' , function($scope, $appBakery , AppUrl , $state){
+.controller('HomeController' , function($scope, $rootScope, $appBakery , AppUrl , $state){
 
 	$scope.init = function(){
-		$appBakery.load(AppUrl).then(function(load){
+		$rootScope.$on('app-json::loaded', function(){
 	        $scope.menu = $appBakery.menu(); 
-	        $scope.appTitle = load.info.name;
+	        $scope.appTitle = $appBakery.info().name;
 	    });
 	};
 
@@ -21,8 +21,12 @@ angular.module('starter')
 		usimple: {
 			active:false,
 			url:""
+		},
+		ulist:{
+			active:false,
+			url:""
 		}
-	}
+	};
 
 	$scope.init = function(){
 	 	
@@ -35,6 +39,11 @@ angular.module('starter')
 	 			case 'usimple' : 
 	 				$scope.moblets.usimple.active = true;
 	 				$scope.moblets.usimple.url = moblet.type.url;
+	 				break;
+	 			case 'ulist' : 
+	 				$scope.moblets.ulist.active = true;
+	 				$scope.moblets.ulist.url = moblet.type.proxy;
+	 				$scope.moblets.ulist.code = moblet.instance.id;
 	 				break;
 	 		}
 	 		$scope.moblets_list.push(moblet.type.superClass + " - " + moblet.type.name);
